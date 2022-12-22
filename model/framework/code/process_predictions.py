@@ -19,10 +19,12 @@ import os
 def main(opt):
 	input_file = opt.input_file
 	output_file = opt.output_file
-	predictions_directory = opt.predictions_dir
-	figures_directory = 'Figures/'
+	root = os.path.dirname(os.path.abspath(__file__))
+	code_dir = os.path.abspath(os.path.join(root, "..", "..", "framework/code"))
+	predictions_directory = predictions_folder= os.path.join(code_dir, "predictions/")
+	#figures_directory = 'Figures/'
 	models = [1,2,3,4,5,6]
-	beam = opt.beam_size
+	beam = 5
 
 	pred_lines = {}
 
@@ -32,10 +34,10 @@ def main(opt):
 			pred_lines[num] = [''.join(line.strip().split(' ')) for line in f_pred.readlines()]
 
 	models_count = len(pred_lines.keys())
-
+	'''
 	if opt.visualise_molecules:
 		if not os.path.exists(figures_directory):
-			os.makedirs(figures_directory)
+			os.makedirs(figures_directory)'''
 
 	molID2smiles = {}
 	molID2metabolites = {}
@@ -43,31 +45,32 @@ def main(opt):
 	drug_lines = open(input_file).read().split('\n')
 	pred_counts = []
 	for i in range(0,len(drug_lines)-1):
-		mol_id,smiles = drug_lines[i].split(',')
-		if not check_smile(smiles):
-			continue
-		smiles = canonicalise_smile(smiles)
-		molID2smiles[mol_id] = smiles
-		predictions = set()
-		for j in range(index,index+beam):
-			for num in range(0,models_count):
-				predictions.add(pred_lines[num][j])
-		index = index + beam
-		processed, invalid, invalid_count = process_predictions(predictions,smiles,0.25,0.25,False,True)
-		pred_counts.append(len(processed))
-		molID2metabolites[mol_id] = processed
-		drug = Chem.MolFromSmiles(smiles)
-		preds = [Chem.MolFromSmiles(pred_smiles) for pred_smiles in processed]
-		fig_dir = figures_directory + '/' + mol_id + '/'
-		if not os.path.exists(fig_dir):
-			os.makedirs(fig_dir)
-		filename = fig_dir + mol_id + '.png'
-		img = Draw.MolToFile(drug,filename,size=(500,500),wedgeBonds=False)
-		prd_count = 1
-		for prd in preds:
-			filename = fig_dir + 'Metabolite' + str(prd_count) + '.png'
-			img = Draw.MolToFile(prd,filename,size=(500,500),wedgeBonds=False)
-			prd_count = prd_count  + 1
+		if i!=0:
+			mol_id,smiles,can_smile = drug_lines[i].split(',')
+			if not check_smile(smiles):
+				continue
+			smiles = canonicalise_smile(smiles)
+			molID2smiles[mol_id] = smiles
+			predictions = set()
+			for j in range(index,index+beam):
+				for num in range(0,models_count):
+					predictions.add(pred_lines[num][j])
+			index = index + beam
+			processed, invalid, invalid_count = process_predictions(predictions,smiles,0.25,0.25,False,True)
+			pred_counts.append(len(processed))
+			molID2metabolites[mol_id] = processed
+			drug = Chem.MolFromSmiles(smiles)
+			preds = [Chem.MolFromSmiles(pred_smiles) for pred_smiles in processed]
+			#fig_dir = figures_directory + '/' + mol_id + '/'
+			#if not os.path.exists(fig_dir):
+			#	os.makedirs(fig_dir)
+			#filename = fig_dir + mol_id + '.png'
+			#img = Draw.MolToFile(drug,filename,size=(500,500),wedgeBonds=False)
+			#prd_count = 1
+			#for prd in preds:
+			#	filename = fig_dir + 'Metabolite' + str(prd_count) + '.png'
+			#	img = Draw.MolToFile(prd,filename,size=(500,500),wedgeBonds=False)
+			#	prd_count = prd_count  + 1
 
 	table = ['Molecule ID', 'SMILES', 'Metabolites']
 	for mol_id in molID2metabolites.keys():
