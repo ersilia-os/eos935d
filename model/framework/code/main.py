@@ -9,7 +9,7 @@ import subprocess
 
 # parse arguments
 input_file = sys.argv[1]
-#output_file = sys.argv[2]
+output_file = sys.argv[2]
 
 # current file directory
 root = os.path.dirname(os.path.abspath(__file__))
@@ -34,6 +34,8 @@ STORE=predictions_folder  # directory for output files
 
 translate_file= os.path.join(code_dir, "translate.py")
 
+process_predictions_file= os.path.join(code_dir, "process_predictions.py")
+
 # model to be run
 def my_model():
 
@@ -43,7 +45,6 @@ def my_model():
     BEAM=5  # beam size
     MIN=5   # minimum length of predicted sequence (in SMILES)
     MAX=120  # maximum length of predicted sequences (in SMILES)
-#recorrer el directorio
     for model_id in {1,2,3,4,5,6}:
         MODEL_FILE= '{}/model_{}.pt'.format(checkpoints_dir,model_id)
         OUT_NAME='model{}_beam{}.txt'.format(model_id,BEAM)
@@ -52,22 +53,8 @@ def my_model():
         cmd2 = 'python {} -model {} -src {} -output {} -n_best {} -beam_size {}  -verbose -min_length {} -max_length {}'.format (translate_file,MODEL_FILE,src_file_tokenise_input,OUT_FILE,BEAM,BEAM,MIN,MAX)
         subprocess.Popen(cmd2, shell=True).wait()
 
-    
-# read SMILES from .csv file, assuming one column with header
-'''with open(input_file, "r") as f:
-    reader = csv.reader(f)
-    next(reader) # skip header
-    smiles_list = [r[0] for r in reader]
-'''
-# run model
-#outputs = my_model(smiles_list, ckpt)
-my_model()
+    #python process_predictions.py -input_file ${infile} -output_file ${outfile} -beam_size ${beam} -visualise_predictions ${bool}
+    cmd3 = 'python {} -input_file {} -output_file {}'.format(process_predictions_file,input_file,output_file)
+    subprocess.Popen(cmd3, shell=True).wait()
 
-# write output in a .csv file
-'''
-with open(output_file, "w") as f:
-    writer = csv.writer(f)
-    writer.writerow(["value"]) # header
-    for o in outputs:
-        writer.writerow([o])
-'''
+my_model()
