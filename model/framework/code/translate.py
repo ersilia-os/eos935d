@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import division, unicode_literals
-#from comet_ml import Experiment
+from comet_ml import Experiment
 import argparse
 
 from onmt.utils.logging import init_logger
