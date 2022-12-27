@@ -9,7 +9,8 @@ RUN conda install pandas==1.3.5
 RUN conda install pytorch==1.1.0 torchvision -c pytorch
 RUN pip install torchtext==0.3.1
 RUN pip install ipython
-RUN pip install "git+https://github.com/KavrakiLab/MetaTrans.git"
+RUN pip install comet_ml
+RUN pip install git+https://github.com/KavrakiLab/MetaTrans.git
 
 WORKDIR /repo
 COPY . /repo
