@@ -12,19 +12,18 @@ def main(opt):
 	count_invalid = 0
 	outfile = open(output_file,'w')
 	lines = open(input_file).read().split('\n')
-	for i in range(0,len(lines)-1):
-		if i!=0:
-			mol_id, smiles, can_smile= lines[i].split(',')
-			if not check_smile(smiles):
-				print('invalid SMILES: ', smiles)
-				count_invalid = count_invalid + 1
-				continue
-			smiles = canonicalise_smile(smiles)
-			smiles_tok = smi_tokenizer(smiles)
-			if i<len(lines)-2:
-				outfile.write(smiles_tok + '\n')
-			else:
-				outfile.write(smiles_tok)
+	for i in range(1,len(lines)-1):
+		mol_id, smiles,can_smile= lines[i].split(',')
+		if not check_smile(smiles):
+			print('invalid SMILES: ', smiles)
+			count_invalid = count_invalid + 1
+			continue
+		smiles = canonicalise_smile(smiles)
+		smiles_tok = smi_tokenizer(smiles)
+		if i<len(lines)-2:
+			outfile.write(smiles_tok + '\n')
+		else:
+			outfile.write(smiles_tok)
 		
 	outfile.close() 
 	if count_invalid>0:
