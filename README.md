@@ -1,35 +1,50 @@
-# Model title
+# Prediction of Drug Metabolites
 
 ## Model identifiers
-- Slug: <add_slug_here>
-- Ersilia ID: <add_ersilia_id_here>
-- Tags: <add_tags_here>
+- Slug: <drug-metabolites>
+- Ersilia ID: <eos935d>
+- Tags: <predict, metabolites, translation>
 
 ## Model description
 
-Short description of the model in one or two sentences
-
-- Input:
-- Output: {unit and description of output) 
-- Model type: (Regression or Classification)
-- Training set: (number of compounds and link to the training data)
-- Mode of training: (is it pretrained? that is were the checkpoints downloaded and used to train the model? or is it retrained? that is trained from scratch with an updated data)
-
+ Model to predict drug metabolites, based on a transformer-based deep learning architecture.
+ First, a Transformer model  is pre-trained on a set of chemical reactions (the specifications were based on the Molecular Transformer: https://github.com/pschwllr/MolecularTransformer ). The model is then fitted to a data set of human metabolic transformations. Finally, a final model is created, which is a set of multiple fitted models. The output would be the union of the predictions of each model.
+- Input: SMILES
+- Output: {sequences of SMILES of the possible metabolites) 
+- Model type: (Deep learning, Transformer-based, neural machine translation)
+- Mode of training: (Pretrained on a set of chemical reactions- Download the trained models from https://rice.box.com/s/5jeb5pp0a3jjr3jvkakfmck4gi71opo0 ).
 ## Source code
 
 Cite the source publication
 
-- Code: include link to the source code
-- Checkpoints: include the link to the checkpoints used if model is a pretrained model
+```
+@article{metatrans,
+  author = {Litsa, Eleni E. and Das, Payel and Kavraki, Lydia E.},
+  title = {Prediction of drug metabolites using neural machine translation},
+  journal = {Chemical Science},
+  year = {2020},
+  month = sep,
+  publisher = {The Royal Society of Chemistry},
+  doi = {10.1039/D0SC02639E},
+  url = {http://dx.doi.org/10.1039/D0SC02639E},
+  issue = {11},
+  pages = {12777-12788}
+}
+```
+
+- Code: https://github.com/KavrakiLab/MetaTrans
+- Checkpoints:https://rice.box.com/s/5jeb5pp0a3jjr3jvkakfmck4gi71opo0
 
 ## License
 
-State the licences used which are GPL v3 license used by Ersilia and the license used by the source code, if any exists. Use [this guide]() on how to license new models to be incorporated into Ersilia's model hub 
+Open Source under the terms of a BSD 3-Clause License.
 
 ## History
 
-- State the date when the model was downloaded and incorporated into Ersilia.
-- List any essential steps/modifications to the original code
+- The model was downloaded and incorporated on December 28, 2022.
+- The original model was modified to process input data from a file with three columns as the Ersilia input file.
+  Removed parts of the code so that it would not save images of the metabolite predictions of each Smile.
+  Added the path and directory to save the predictions of each fitted model.
 
 ## About us
 
