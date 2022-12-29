@@ -1,8 +1,8 @@
 # Prediction of Drug Metabolites
 
 ## Model identifiers
-- Slug: <drug-metabolites>
-- Ersilia ID: <eos935d>
+- Slug: drug-metabolites
+- Ersilia ID: eos935d
 - Tags: <predict, metabolites, translation>
 
 ## Model description
