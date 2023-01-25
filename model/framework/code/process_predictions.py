@@ -6,6 +6,7 @@ from rdkit.Chem import AllChem
 from rdkit.Chem import Draw
 from utils import *
 import os
+import csv
 
 ## it reads the output of the models, un-tokenises the predicted sequences and filters out unlikely metabolites
 ## -input_file: the csv file that has the input molecules (molecule ID and SMILES representations)
@@ -22,7 +23,7 @@ def main(opt):
 	root = os.path.dirname(os.path.abspath(__file__))
 	code_dir = os.path.abspath(os.path.join(root, "..", "..", "framework/code"))
 	predictions_directory = predictions_folder= os.path.join(code_dir, "predictions/")
-	#figures_directory = 'Figures/'
+
 	models = [1,2,3,4,5,6]
 	beam = 5
 
@@ -34,10 +35,6 @@ def main(opt):
 			pred_lines[num] = [''.join(line.strip().split(' ')) for line in f_pred.readlines()]
 
 	models_count = len(pred_lines.keys())
-	'''
-	if opt.visualise_molecules:
-		if not os.path.exists(figures_directory):
-			os.makedirs(figures_directory)'''
 
 	molID2smiles = {}
 	molID2metabolites = {}
@@ -61,18 +58,9 @@ def main(opt):
 			molID2metabolites[mol_id] = processed
 			drug = Chem.MolFromSmiles(smiles)
 			preds = [Chem.MolFromSmiles(pred_smiles) for pred_smiles in processed]
-			#fig_dir = figures_directory + '/' + mol_id + '/'
-			#if not os.path.exists(fig_dir):
-			#	os.makedirs(fig_dir)
-			#filename = fig_dir + mol_id + '.png'
-			#img = Draw.MolToFile(drug,filename,size=(500,500),wedgeBonds=False)
-			#prd_count = 1
-			#for prd in preds:
-			#	filename = fig_dir + 'Metabolite' + str(prd_count) + '.png'
-			#	img = Draw.MolToFile(prd,filename,size=(500,500),wedgeBonds=False)
-			#	prd_count = prd_count  + 1
 
 	table = ['Molecule ID', 'SMILES', 'Metabolites']
+	list_metabolites=[]
 	for mol_id in molID2metabolites.keys():
 		metabolites_str = ''
 		smiles = molID2smiles[mol_id]
@@ -83,10 +71,15 @@ def main(opt):
 		entry = [mol_id, smiles, metabolites_str]
 		table = np.vstack((table,entry))
 
-	with open(output_file,'wb') as f:
-		np.savetxt(f,table, fmt='%s', delimiter=',')
+		list_metabolites.append(metabolites_str)
 
 
+	with open(output_file, "w") as f:
+		writer = csv.writer(f)
+		writer.writerow(["Metabolites"]) # header
+		for o in list_metabolites:
+			writer.writerow([o])
+			
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-input_file', type=str,help='Input File')

@@ -3,7 +3,6 @@ import os
 import csv
 import sys
 import subprocess
-from pythonpath_script import getPythonPath_env
 
 # parse arguments
 input_file = sys.argv[1]
@@ -31,10 +30,7 @@ process_predictions_file= os.path.join(code_dir, "process_predictions.py")
 
 # model to be run
 def my_model():
-    name_env_model= "eos935d"
-    python_path_env= getPythonPath_env(name_env_model)
-   
-    cmd1 = '{} {} -input_file {}'.format(python_path_env,process_data_path,input_file)
+    cmd1 = 'python {} -input_file {}'.format(process_data_path,input_file)
     subprocess.Popen(cmd1, shell=True).wait()
 
     BEAM=5  # beam size
@@ -45,10 +41,10 @@ def my_model():
         OUT_NAME='model{}_beam{}.txt'.format(model_id,BEAM)
         OUT_FILE='{}{}'.format(STORE,OUT_NAME)
 
-        cmd2 = '{} {} -model {} -src {} -output {} -n_best {} -beam_size {}  -verbose -min_length {} -max_length {}'.format (python_path_env, translate_file,MODEL_FILE,src_file_tokenise_input,OUT_FILE,BEAM,BEAM,MIN,MAX)
+        cmd2 = 'python {} -model {} -src {} -output {} -n_best {} -beam_size {}  -verbose -min_length {} -max_length {}'.format (translate_file,MODEL_FILE,src_file_tokenise_input,OUT_FILE,BEAM,BEAM,MIN,MAX)
         subprocess.Popen(cmd2, shell=True).wait()
 
-    cmd3 = '{} {} -input_file {} -output_file {}'.format(python_path_env, process_predictions_file,input_file,output_file)
+    cmd3 = 'python {} -input_file {} -output_file {}'.format(process_predictions_file,input_file,output_file)
     subprocess.Popen(cmd3, shell=True).wait()
 
 my_model()
