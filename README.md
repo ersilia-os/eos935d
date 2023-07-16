@@ -23,6 +23,9 @@ Small molecules are metabolized by the liver in what is known as phase I and pha
 * [Source Code](https://github.com/KavrakiLab/MetaTrans)
 * Ersilia contributor: [carcablop](https://github.com/carcablop)
 
+## Ersilia model URLs
+* [GitHub](https://github.com/ersilia-os/eos935d)
+
 ## Citation
 
 If you use this model, please cite the [original authors](https://pubs.rsc.org/en/content/articlelanding/2020/sc/d0sc02639e#fn1) of the model and the [Ersilia Model Hub](https://github.com/ersilia-os/ersilia/blob/master/CITATION.cff).
