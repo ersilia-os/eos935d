@@ -6,6 +6,7 @@ from rdkit.Chem import AllChem
 from rdkit.Chem import Draw
 from utils import *
 import os
+import csv
 
 ## it reads the output of the models, un-tokenises the predicted sequences and filters out unlikely metabolites
 ## -input_file: the csv file that has the input molecules (molecule ID and SMILES representations)
@@ -25,6 +26,7 @@ def main(opt):
 	#figures_directory = 'Figures/'
 	models = [1,2,3,4,5,6]
 	beam = 5
+	max_metabolites = 10  # Set the maximum number of metabolites
 
 	pred_lines = {}
 
@@ -42,50 +44,49 @@ def main(opt):
 	molID2smiles = {}
 	molID2metabolites = {}
 	index = 0
-	drug_lines = open(input_file).read().split('\n')
+	# read SMILES from .csv file, assuming one column with header
+	with open(input_file, "r") as f:
+		reader = csv.reader(f)
+		next(reader)  # skip header
+		smiles_list = [r[0] for r in reader]
 	pred_counts = []
-	for i in range(0,len(drug_lines)-1):
-		if i!=0:
-			mol_id,smiles,can_smile = drug_lines[i].split(',')
-			if not check_smile(smiles):
-				continue
-			smiles = canonicalise_smile(smiles)
-			molID2smiles[mol_id] = smiles
-			predictions = set()
-			for j in range(index,index+beam):
-				for num in range(0,models_count):
-					predictions.add(pred_lines[num][j])
-			index = index + beam
-			processed, invalid, invalid_count = process_predictions(predictions,smiles,0.25,0.25,False,True)
-			pred_counts.append(len(processed))
-			molID2metabolites[mol_id] = processed
-			drug = Chem.MolFromSmiles(smiles)
-			preds = [Chem.MolFromSmiles(pred_smiles) for pred_smiles in processed]
-			#fig_dir = figures_directory + '/' + mol_id + '/'
-			#if not os.path.exists(fig_dir):
-			#	os.makedirs(fig_dir)
-			#filename = fig_dir + mol_id + '.png'
-			#img = Draw.MolToFile(drug,filename,size=(500,500),wedgeBonds=False)
-			#prd_count = 1
-			#for prd in preds:
-			#	filename = fig_dir + 'Metabolite' + str(prd_count) + '.png'
-			#	img = Draw.MolToFile(prd,filename,size=(500,500),wedgeBonds=False)
-			#	prd_count = prd_count  + 1
+	for i in range(0, len(smiles_list)): 
+		smiles = smiles_list[i]
+		if not check_smile(smiles):
+			continue
+		smiles = canonicalise_smile(smiles)
+		mol_id = f'molecule-{i}'  # Molecule numbering
+		molID2smiles[mol_id] = smiles  # Store SMILES for the molecule
+		predictions = set()
+		for j in range(index, index + beam):
+			for num in range(0, models_count):
+				predictions.add(pred_lines[num][j])
+		index = index + beam
+		processed, invalid, invalid_count = process_predictions(predictions,smiles,0.25,0.25,False,True)
+		pred_counts.append(len(processed))
+		molID2metabolites[mol_id] = processed
+		# drug = Chem.MolFromSmiles(smiles)
+		# preds = [Chem.MolFromSmiles(pred_smiles) for pred_smiles in processed] 
 
-	table = ['Molecule ID', 'SMILES', 'Metabolites']
+# Convert the results to separate columns for each metabolite
+	columns = ['Molecule ID', 'SMILES'] + [f'Metabolite_{i+1}' for i in range(max_metabolites)]
+	data = []
 	for mol_id in molID2metabolites.keys():
-		metabolites_str = ''
 		smiles = molID2smiles[mol_id]
-		metabolites = molID2metabolites[mol_id]
-		for metabolite in metabolites:
-			metabolites_str = metabolites_str + metabolite + ' '
-		metabolites_str = metabolites_str[:-1]
-		entry = [mol_id, smiles, metabolites_str]
-		table = np.vstack((table,entry))
-
-	with open(output_file,'wb') as f:
-		np.savetxt(f,table, fmt='%s', delimiter=',')
-
+		metabolites = list(molID2metabolites[mol_id])  # Convert set to a listid]
+		row = [mol_id, smiles]
+		for i in range(max_metabolites):
+			if i < len(metabolites):
+				row.append(metabolites[i])
+			else:
+				row.append("")  # Fill empty cells if there are fewer than max_metabolites predictions
+		data.append(row)
+	
+	with open(output_file, 'w', newline='') as f:
+		writer = csv.writer(f)
+		writer.writerow(columns)
+		for row in data:
+			writer.writerow(row) 
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser()

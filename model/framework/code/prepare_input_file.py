@@ -1,6 +1,7 @@
 import argparse
 from utils import *
 import os
+import csv
 
 ##  it prepares the molecules for translation: it canonicalizes SMILES and then tokenizes them. The data are stored in a txt file
 ## -input_file: the input molecules in a csv ot txt file
@@ -11,16 +12,19 @@ def main(opt):
 	output_file = opt.output_file
 	count_invalid = 0
 	outfile = open(output_file,'w')
-	lines = open(input_file).read().split('\n')
-	for i in range(1,len(lines)-1):
-		mol_id, smiles,can_smile= lines[i].split(',')
-		if not check_smile(smiles):
-			print('invalid SMILES: ', smiles)
+	# smile_lines = open(input_file).read().split('\n')
+	with open(input_file, "r") as f:
+		reader = csv.reader(f)
+		next(reader)  # skip header
+		smiles_list = [r[0] for r in reader]
+	for i in range(0,len(smiles_list)): 
+		if not check_smile(smiles_list[i]):
+			print('invalid SMILES: ', smiles_list[i])
 			count_invalid = count_invalid + 1
 			continue
-		smiles = canonicalise_smile(smiles)
+		smiles = canonicalise_smile(smiles_list[i])
 		smiles_tok = smi_tokenizer(smiles)
-		if i<len(lines)-2:
+		if i<len(smiles_list)-1:
 			outfile.write(smiles_tok + '\n')
 		else:
 			outfile.write(smiles_tok)
