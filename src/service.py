@@ -88,7 +88,7 @@ class Model(object):
             h = next(reader)[2:]
             R = []
             for r in reader:
-                R += [{"Metabolites": [String(x) for x in r[2:]]}] 
+                R += [{"Metabolites": [String(x) if x != "" else "" for x in r[2:]]}] # handle cases where the value is an empty string ("") as well
         meta = {
             "Metabolites": h
         }
