@@ -85,12 +85,12 @@ class Model(object):
             ).wait()
         with open(output_file, "r") as f:
             reader = csv.reader(f)
-            h = next(reader)
+            h = next(reader)[2:]
             R = []
             for r in reader:
-                R += [{"outcome": [String(x) for x in r]}] 
+                R += [{"Metabolites": [String(x) for x in r[2:]]}] 
         meta = {
-            "outcome": h
+            "Metabolites": h
         }
         result = {
             "result": R,
