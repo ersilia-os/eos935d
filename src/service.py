@@ -65,10 +65,9 @@ class Model(object):
         output_file = os.path.join(tmp_folder, self.OUTPUT_FILE)
         log_file = os.path.join(tmp_folder, self.LOG_FILE)
         with open(data_file, "w") as f:
-            f.write("mol_id,smiles,can_smiles"+os.linesep)
-            for i, smiles in enumerate(smiles_list):
-                s="molecule-{0},{1},{2}\n".format(i,smiles, smiles)
-                f.write(s)
+            f.write("input" + os.linesep)
+            for inp in smiles_list:
+                f.write(inp + os.linesep)
         run_file = os.path.join(tmp_folder, self.RUN_FILE)
         with open(run_file, "w") as f:
             lines = [
