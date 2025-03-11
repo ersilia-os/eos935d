@@ -1,0 +1,11 @@
+name,type,direction,description
+metabolite_0,string,,Metabolite at index 0 of the source molecule
+metabolite_1,string,,Metabolite at index 1 of the source molecule
+metabolite_2,string,,Metabolite at index 2 of the source molecule
+metabolite_3,string,,Metabolite at index 3 0 of the source molecule
+metabolite_4,string,,Metabolite at index 4 of the source molecule
+metabolite_5,string,,Metabolite at index 5 of the source molecule
+metabolite_6,string,,Metabolite at index 6 of the source molecule
+metabolite_7,string,,Metabolite at index 7 of the source molecule
+metabolite_8,string,,Metabolite at index 8 of the source molecule
+metabolite_9,string,,Metabolite at index 9 of the source molecule
