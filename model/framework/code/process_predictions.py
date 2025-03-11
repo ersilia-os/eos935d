@@ -69,7 +69,7 @@ def main(opt):
 		# preds = [Chem.MolFromSmiles(pred_smiles) for pred_smiles in processed] 
 
 # Convert the results to separate columns for each metabolite
-	columns = ['Molecule ID', 'SMILES'] + [f'Metabolite_{i+1}' for i in range(max_metabolites)]
+	columns = ['Molecule ID', 'SMILES'] + [f'metabolite_{i}' for i in range(max_metabolites)]
 	data = []
 	for mol_id in molID2metabolites.keys():
 		smiles = molID2smiles[mol_id]
