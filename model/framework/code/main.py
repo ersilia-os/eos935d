@@ -51,3 +51,8 @@ def my_model():
     subprocess.Popen(cmd3, shell=True).wait()
 
 my_model()
+os.remove(os.path.join(code_dir, "processed_data.txt"))
+for filename in os.listdir(predictions_folder):
+    file_path = os.path.join(predictions_folder, filename)
+    if os.path.isfile(file_path):
+        os.remove(file_path)

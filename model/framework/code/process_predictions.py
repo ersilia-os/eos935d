@@ -22,11 +22,11 @@ def main(opt):
 	output_file = opt.output_file
 	root = os.path.dirname(os.path.abspath(__file__))
 	code_dir = os.path.abspath(os.path.join(root, "..", "..", "framework/code"))
-	predictions_directory = predictions_folder= os.path.join(code_dir, "predictions/")
+	predictions_directory = os.path.join(code_dir, "predictions/")
 	#figures_directory = 'Figures/'
 	models = [1,2,3,4,5,6]
 	beam = 5
-	max_metabolites = 10  # Set the maximum number of metabolites
+	max_metabolites = 15  # Set the maximum number of metabolites
 
 	pred_lines = {}
 
@@ -69,12 +69,11 @@ def main(opt):
 		# preds = [Chem.MolFromSmiles(pred_smiles) for pred_smiles in processed] 
 
 # Convert the results to separate columns for each metabolite
-	columns = ['Molecule ID', 'SMILES'] + [f'metabolite_{i}' for i in range(max_metabolites)]
+	columns =[f'metabolite_{str(i).zfill(2)}' for i in range(max_metabolites)]
 	data = []
 	for mol_id in molID2metabolites.keys():
-		smiles = molID2smiles[mol_id]
 		metabolites = list(molID2metabolites[mol_id])  # Convert set to a listid]
-		row = [mol_id, smiles]
+		row = []
 		for i in range(max_metabolites):
 			if i < len(metabolites):
 				row.append(metabolites[i])
