@@ -72,7 +72,7 @@ def main(opt):
 	columns =[f'metabolite_{str(i).zfill(2)}' for i in range(max_metabolites)]
 	data = []
 	for mol_id in molID2metabolites.keys():
-		metabolites = list(molID2metabolites[mol_id])  # Convert set to a listid]
+		metabolites = sorted(list(molID2metabolites[mol_id]), key=len, reverse=True)  # Convert set to a listid]
 		row = []
 		for i in range(max_metabolites):
 			if i < len(metabolites):
