@@ -53,6 +53,8 @@ def my_model():
 my_model()
 os.remove(os.path.join(code_dir, "processed_data.txt"))
 for filename in os.listdir(predictions_folder):
+    if filename==".gitkeep":
+        continue
     file_path = os.path.join(predictions_folder, filename)
     if os.path.isfile(file_path):
         os.remove(file_path)
