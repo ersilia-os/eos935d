@@ -39,7 +39,7 @@ def my_model():
     BEAM=5  # beam size
     MIN=5   # minimum length of predicted sequence (in SMILES)
     MAX=120  # maximum length of predicted sequences (in SMILES)
-    for model_id in {1,2,3,4,5,6}:
+    for model_id in [1,2,3,4,5,6]:
         MODEL_FILE= '{}/model_{}.pt'.format(checkpoints_dir,model_id)
         OUT_NAME='model{}_beam{}.txt'.format(model_id,BEAM)
         OUT_FILE='{}{}'.format(STORE,OUT_NAME)
