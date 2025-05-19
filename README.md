@@ -2,7 +2,7 @@
 
 Small molecules are metabolized by the liver in what is known as phase I and phase II reactions. Those can lead to reduced drug efficacy and generation of toxic metabolites, causing serious side effects. This model predicts the human metabolites of small molecules using a molecular transformer pr-trained on general chemical reactions and fine tuned to human metabolism. It provides up to 10 metabolites for each input molecule.
 
-This model was incorporated on 2022-12-20.
+This model was incorporated on 2022-12-16.
 
 ## Information
 ### Identifiers
