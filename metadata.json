@@ -3,21 +3,18 @@
     "Slug": "meta-trans",
     "Status": "Ready",
     "Title": "MetaTrans: human drug metabolites",
-    "Description": "Small molecules are metabolized by the liver in what is known as phase I and phase II reactions. Those can lead to reduced drug efficacy and generation of toxic metabolites, causing serious side effects. This model predicts the human metabolites of small molecules using a molecular transformer pr-trained on general chemical reactions and fine tuned to human metabolism. It provides up to 10 metabolites for each input molecule.\n",
+    "Description": "Small molecules are metabolized by the liver in what is known as phase I and phase II reactions. Those can lead to reduced drug efficacy and generation of toxic metabolites, causing serious side effects. This model predicts the human metabolites of small molecules using a molecular transformer pr-trained on general chemical reactions and fine tuned to human metabolism. It provides up to 10 metabolites for each input molecule.",
+    "Deployment": [
+        "Local"
+    ],
     "Source": "Local",
     "Source Type": "External",
+    "Task": "Annotation",
+    "Subtask": "Activity prediction",
     "Input": [
         "Compound"
     ],
     "Input Dimension": 1,
-    "Task": "Annotation",
-    "Subtask": "Activity prediction",
-    "Biomedical Area": [
-        "ADMET"
-    ],
-    "Target Organism": [
-        "Not Applicable"
-    ],
     "Output": [
         "Compound"
     ],
@@ -27,19 +24,22 @@
     "Tag": [
         "Metabolism"
     ],
-    "Publication": "https://pubs.rsc.org/en/content/articlelanding/2020/sc/d0sc02639e#fn1",
+    "Biomedical Area": [
+        "ADMET"
+    ],
+    "Target Organism": [
+        "Not Applicable"
+    ],
     "Publication Type": "Peer reviewed",
     "Publication Year": 2020,
+    "Publication": "https://pubs.rsc.org/en/content/articlelanding/2020/sc/d0sc02639e#fn1",
     "Source Code": "https://github.com/KavrakiLab/MetaTrans",
     "License": "BSD-3-Clause",
     "Contributor": "carcablop",
-    "Incorporation Date": "2022-12-20",
+    "Incorporation Date": "2022-12-16",
+    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos935d.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos935d",
     "Docker Architecture": [
         "AMD64"
-    ],
-    "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos935d.zip",
-    "Deployment": [
-        "Local"
     ]
 }
