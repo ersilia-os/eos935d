@@ -39,9 +39,13 @@
     "Incorporation Date": "2022-12-16",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos935d.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos935d",
-    "Docker Architecture": [
-        "AMD64"
-    ],
+    "Docker Architecture": "AMD64",
     "Model Size": 1294.0,
-    "Environment Size": 2036.0
+    "Environment Size": 2036.0,
+    "Image Size": 5850.65,
+    "Computational Performance 1": "null",
+    "Computational Performance 2": "null",
+    "Computational Performance 3": "null",
+    "Computational Performance 4": "null",
+    "Computational Performance 5": "null"
 }
