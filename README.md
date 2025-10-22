@@ -2,8 +2,7 @@
 
 Small molecules are metabolized by the liver in what is known as phase I and phase II reactions. Those can lead to reduced drug efficacy and generation of toxic metabolites, causing serious side effects. This model predicts the human metabolites of small molecules using a molecular transformer pr-trained on general chemical reactions and fine tuned to human metabolism. It provides up to 10 metabolites for each input molecule.
 
-This model was incorporated on 2022-12-16.
-
+This model was incorporated on 2022-12-16.Last packaged on 2025-10-22.
 
 ## Information
 ### Identifiers
@@ -51,7 +50,12 @@ _10 of 15 columns are shown_
 ### Resource Consumption
 - **Model Size (Mb):** `1294`
 - **Environment Size (Mb):** `2049`
+- **Image Size (Mb):** `5868.23`
 
+**Computational Performance (seconds):**
+- 10 inputs: `42.16`
+- 100 inputs: `1435.58`
+- 10000 inputs: `-1`
 
 ### References
 - **Source Code**: [https://github.com/KavrakiLab/MetaTrans](https://github.com/KavrakiLab/MetaTrans)
