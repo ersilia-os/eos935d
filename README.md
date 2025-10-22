@@ -50,7 +50,7 @@ _10 of 15 columns are shown_
 
 ### Resource Consumption
 - **Model Size (Mb):** `1294`
-- **Environment Size (Mb):** `2036`
+- **Environment Size (Mb):** `2049`
 
 
 ### References
