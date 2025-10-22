@@ -37,9 +37,17 @@
     "License": "BSD-3-Clause",
     "Contributor": "carcablop",
     "Incorporation Date": "2022-12-16",
+    "Last Packaging Date": "2025-10-22",
+    "Release": "v1.0.0",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos935d.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos935d",
     "Docker Architecture": "AMD64",
     "Model Size": 1294.0,
-    "Environment Size": 2049.0
+    "Environment Size": 2049.0,
+    "Image Size": 5868.23,
+    "Computational Performance 1": 42.16,
+    "Computational Performance 2": 226.83,
+    "Computational Performance 3": 1435.58,
+    "Computational Performance 4": -1.0,
+    "Computational Performance 5": -1.0
 }
