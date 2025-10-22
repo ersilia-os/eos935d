@@ -4,6 +4,7 @@ Small molecules are metabolized by the liver in what is known as phase I and pha
 
 This model was incorporated on 2022-12-16.
 
+
 ## Information
 ### Identifiers
 - **Ersilia Identifier:** `eos935d`
@@ -13,7 +14,7 @@ This model was incorporated on 2022-12-16.
 - **Task:** `Annotation`
 - **Subtask:** `Activity prediction`
 - **Biomedical Area:** `ADMET`
-- **Target Organism:** `Not Applicable`
+- **Target Organism:** `Any`
 - **Tags:** `Metabolism`
 
 ### Input
