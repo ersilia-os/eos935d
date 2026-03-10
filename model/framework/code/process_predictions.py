@@ -20,9 +20,7 @@ import csv
 def main(opt):
 	input_file = opt.input_file
 	output_file = opt.output_file
-	root = os.path.dirname(os.path.abspath(__file__))
-	code_dir = os.path.abspath(os.path.join(root, "..", "..", "framework/code"))
-	predictions_directory = os.path.join(code_dir, "predictions/")
+	predictions_directory = opt.predictions_dir
 	#figures_directory = 'Figures/'
 	models = [1,2,3,4,5,6]
 	beam = 5
