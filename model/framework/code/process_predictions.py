@@ -29,7 +29,7 @@ def main(opt):
 	pred_lines = {}
 
 	for num in range(0,len(models)):
-		predictions_file = predictions_directory+'model'+str(models[num])+'_'+'beam'+str(beam)+'.txt'
+		predictions_file = os.path.join(predictions_directory, 'model'+str(models[num])+'_'+'beam'+str(beam)+'.txt')
 		with open(predictions_file) as f_pred:  
 			pred_lines[num] = [''.join(line.strip().split(' ')) for line in f_pred.readlines()]
 
