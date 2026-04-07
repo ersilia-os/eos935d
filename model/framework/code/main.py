@@ -43,12 +43,13 @@ def my_model():
     BEAM=5  # beam size
     MIN=5   # minimum length of predicted sequence (in SMILES)
     MAX=120  # maximum length of predicted sequences (in SMILES)
+    BATCH_SIZE=8  # molecules per batch; lower this further if OOM persists
     for model_id in [1,2,3,4,5,6]:
         MODEL_FILE= '{}/model_{}.pt'.format(checkpoints_dir,model_id)
         OUT_NAME='model{}_beam{}.txt'.format(model_id,BEAM)
         OUT_FILE='{}{}'.format(STORE,OUT_NAME)
 
-        cmd2 = '{} {} -model {} -src {} -output {} -n_best {} -beam_size {}  -verbose -min_length {} -max_length {}'.format(sys.executable, translate_file,MODEL_FILE,src_file_tokenise_input,OUT_FILE,BEAM,BEAM,MIN,MAX)
+        cmd2 = '{} {} -model {} -src {} -output {} -n_best {} -beam_size {}  -verbose -min_length {} -max_length {} -batch_size {}'.format(sys.executable, translate_file,MODEL_FILE,src_file_tokenise_input,OUT_FILE,BEAM,BEAM,MIN,MAX,BATCH_SIZE)
         subprocess.Popen(cmd2, shell=True).wait()
 
     cmd3 = '{} {} -input_file {} -output_file {} -predictions_dir {}'.format(sys.executable, process_predictions_file, input_file, output_file, predictions_folder)
