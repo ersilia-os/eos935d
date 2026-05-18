@@ -59,7 +59,7 @@ _10 of 15 columns are shown_
 
 ### References
 - **Source Code**: [https://github.com/KavrakiLab/MetaTrans](https://github.com/KavrakiLab/MetaTrans)
-- **Publication**: [https://pubs.rsc.org/en/content/articlelanding/2020/sc/d0sc02639e#fn1](https://pubs.rsc.org/en/content/articlelanding/2020/sc/d0sc02639e#fn1)
+- **Publication**: [https://doi.org/10.1039/D0SC02639E](https://doi.org/10.1039/D0SC02639E)
 - **Publication Type:** `Peer reviewed`
 - **Publication Year:** `2020`
 - **Ersilia Contributor:** [carcablop](https://github.com/carcablop)
