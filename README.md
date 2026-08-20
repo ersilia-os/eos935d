@@ -1,6 +1,6 @@
 # MetaTrans: human drug metabolites
 
-Small molecules are metabolized by the liver in what is known as phase I and phase II reactions. Those can lead to reduced drug efficacy and generation of toxic metabolites, causing serious side effects. This model predicts the human metabolites of small molecules using a molecular transformer pr-trained on general chemical reactions and fine tuned to human metabolism. It provides up to 10 metabolites for each input molecule.
+Predicts the metabolites a compound is likely to form in humans, returning up to fifteen product structures. MetaTrans treats biotransformation as translation, applying a neural machine translation model that reads a parent molecule and writes its metabolites, trained on documented human metabolic reactions. Predictions cover plausible chemical transformations without indicating which enzyme is responsible, how fast the reaction proceeds, or whether the metabolite would accumulate.
 
 This model was incorporated on 2022-12-16.Last packaged on 2026-04-14.
 
@@ -10,10 +10,10 @@ This model was incorporated on 2022-12-16.Last packaged on 2026-04-14.
 - **Slug:** `meta-trans`
 
 ### Domain
-- **Task:** `Annotation`
-- **Subtask:** `Activity prediction`
+- **Task:** `Sampling`
+- **Subtask:** `Generation`
 - **Biomedical Area:** `ADMET`
-- **Target Organism:** `Any`
+- **Target Organism:** `Homo sapiens`
 - **Tags:** `Metabolism`
 
 ### Input
@@ -23,7 +23,7 @@ This model was incorporated on 2022-12-16.Last packaged on 2026-04-14.
 ### Output
 - **Output Dimension:** `15`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** A maximum of 15 human metabolites generated from the input molecule
+- **Interpretation:** Up to fifteen predicted human metabolites of the input compound.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
