@@ -50,10 +50,16 @@ def main(opt):
 	pred_counts = []
 	for i in range(0, len(smiles_list)): 
 		smiles = smiles_list[i]
+		mol_id = f'molecule-{i}'  # Molecule numbering
 		if not check_smile(smiles):
+			# Row must still be emitted (empty) so the output keeps one row per
+			# input row. prepare_input_file.py skips this same index when writing
+			# the translator's source file (via the same check_smile call on the
+			# same list), so `index` correctly stays unadvanced here too - only
+			# the *output row* was previously being dropped instead of padded.
+			molID2metabolites[mol_id] = set()
 			continue
 		smiles = canonicalise_smile(smiles)
-		mol_id = f'molecule-{i}'  # Molecule numbering
 		molID2smiles[mol_id] = smiles  # Store SMILES for the molecule
 		predictions = set()
 		for j in range(index, index + beam):

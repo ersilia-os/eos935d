@@ -24,10 +24,6 @@ predictions_folder = os.path.join(tmp_dir, "predictions")
 os.makedirs(predictions_folder)
 STORE = predictions_folder + "/"  # directory for output files
 
-#list the models.pt from checkpoints
-with os.scandir(checkpoints_dir) as models_pretrained:
-    models_pretrained=[ model_pretrained.name for model_pretrained in models_pretrained if model_pretrained.name.endswith('.pt')]
-
 translate_file= os.path.join(code_dir, "translate.py")
 
 process_predictions_file= os.path.join(code_dir, "process_predictions.py")
