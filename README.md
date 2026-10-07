@@ -1,6 +1,6 @@
 # MetaTrans: human drug metabolites
 
-Predicts the metabolites a compound is likely to form in humans, returning up to fifteen product structures. MetaTrans treats biotransformation as translation, applying a neural machine translation model that reads a parent molecule and writes its metabolites, trained on documented human metabolic reactions. Predictions cover plausible chemical transformations without indicating which enzyme is responsible, how fast the reaction proceeds, or whether the metabolite would accumulate.
+Drugs are reshaped in the liver by phase I and phase II reactions that can blunt efficacy or create toxic metabolites, so the likely products matter early. MetaTrans casts biotransformation as translation, fine-tuning a molecular transformer pre-trained on general chemical reactions with curated human metabolic reactions and combining six fine-tuned models whose predictions are pooled. Decoding uses beam search rather than sampling, so the same input always returns the same set of up to fifteen metabolites, with no indication of the enzyme, the rate or whether the metabolite accumulates.
 
 This model was incorporated on 2022-12-16.Last packaged on 2026-09-28.
 
@@ -23,7 +23,7 @@ This model was incorporated on 2022-12-16.Last packaged on 2026-09-28.
 ### Output
 - **Output Dimension:** `15`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Up to fifteen predicted human metabolites of the input compound.
+- **Interpretation:** Up to fifteen human metabolites generated deterministically by beam search from the input compound.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
