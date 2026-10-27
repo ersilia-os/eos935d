@@ -85,10 +85,10 @@ class Model(object):
             ).wait()
         with open(output_file, "r") as f:
             reader = csv.reader(f)
-            h = next(reader)[2:]
+            h = next(reader)
             R = []
             for r in reader:
-                R += [{"Metabolites": [String(x) if x != "" else "" for x in r[2:]]}] # handle cases where the value is an empty string ("") as well
+                R += [{"Metabolites": [String(x) if x != "" else "" for x in r]}] # handle cases where the value is an empty string ("") as well
         meta = {
             "Metabolites": h
         }
