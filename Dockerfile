@@ -10,7 +10,7 @@ RUN pip install torch==1.4.0
 RUN pip install torchtext==0.3.1
 RUN pip install ipython==8.12.3
 RUN pip install comet_ml==3.49.8
-RUN pip install git+https://github.com/KavrakiLab/MetaTrans.git
+RUN pip install git+https://github.com/KavrakiLab/MetaTrans.git@30d88639da9e0b9e8db9b7686ca19f2d24261c34
 
 
 WORKDIR /repo
