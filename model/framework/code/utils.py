@@ -14,6 +14,21 @@ def canonicalise_smile(smi):
     canonical = Chem.MolToSmiles(mol, isomericSmiles=True)
     return canonical
 
+def drop_stereoisomer_repeats(smiles_list):
+    """Keep the first of each group of SMILES that differ only in stereochemistry.
+
+    The order of the list decides which one is kept, so a sorted list gives a
+    deterministic result.
+    """
+    seen = set()
+    kept = []
+    for smi in smiles_list:
+        flat = Chem.MolToSmiles(Chem.MolFromSmiles(smi), isomericSmiles=False)
+        if flat not in seen:
+            seen.add(flat)
+            kept.append(smi)
+    return kept
+
 def randomise_smile(smi):
     # unrestricted
     mol = Chem.MolFromSmiles(smi)
@@ -81,16 +96,15 @@ def get_added_atoms(reactant,product):
 
 
 def check_added_atoms(reactant,product):
-    pass_test = True
     accepted_atoms = set(['C','c','O','o','H'])
     added_atoms, counts = get_added_atoms(reactant,product)
     for atom in added_atoms:
         if not atom in accepted_atoms:
-            if (atom == 'S') and ('O' in counts.keys()) and (counts['O']==3):
-                pass_test = True
-            else:
-                pass_test = False
-    return pass_test
+            # S is accepted only as a sulfate (three O added). One refused element refuses the product, so the
+            # answer does not depend on the order in which the set is read (that order changes with PYTHONHASHSEED)
+            if not ((atom == 'S') and ('O' in counts.keys()) and (counts['O']==3)):
+                return False
+    return True
 
 
 def aldehyde_To_Carboxyl(smiles):

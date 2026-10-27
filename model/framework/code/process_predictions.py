@@ -77,6 +77,8 @@ def main(opt):
 	data = []
 	for mol_id in molID2metabolites.keys():
 		metabolites = sorted(list(molID2metabolites[mol_id]),key=lambda x: (-len(x), x))
+		# Stereoisomers of one metabolite would take several of the slots, so only the first of each is kept, before the cut at max_metabolites
+		metabolites = drop_stereoisomer_repeats(metabolites)
 		row = []
 		for i in range(max_metabolites):
 			if i < len(metabolites):
