@@ -2,7 +2,7 @@
 
 Drugs are reshaped in the liver by phase I and phase II reactions that can blunt efficacy or create toxic metabolites, so the likely products matter early. MetaTrans casts biotransformation as translation, fine-tuning a molecular transformer pre-trained on general chemical reactions with curated human metabolic reactions and combining six fine-tuned models whose predictions are pooled. Decoding uses beam search rather than sampling, so the same input always returns the same set of up to fifteen metabolites, with no indication of the enzyme, the rate or whether the metabolite accumulates.
 
-This model was incorporated on 2022-12-16.Last packaged on 2026-09-28.
+This model was incorporated on 2022-12-16.Last packaged on 2026-10-28.
 
 ## Information
 ### Identifiers
@@ -50,11 +50,11 @@ _10 of 15 columns are shown_
 ### Resource Consumption
 - **Model Size (Mb):** `1294`
 - **Environment Size (Mb):** `2040`
-- **Image Size (Mb):** `4613.9`
+- **Image Size (Mb):** `4614.53`
 
 **Computational Performance (seconds):**
-- 10 inputs: `36.96`
-- 100 inputs: `554.49`
+- 10 inputs: `40.3`
+- 100 inputs: `899.52`
 - 10000 inputs: `-1`
 
 ### References
