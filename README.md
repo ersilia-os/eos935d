@@ -47,7 +47,7 @@ _10 of 30 columns are shown_
 - **DockerHub**: [https://hub.docker.com/r/ersiliaos/eos935d](https://hub.docker.com/r/ersiliaos/eos935d)
 - **Docker Architecture:** `AMD64`
 - **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos935d.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos935d.zip)
-- **Apptainer**: [https://models-sif.s3.eu-north-1.amazonaws.com/eos935d_v3.sif](https://models-sif.s3.eu-north-1.amazonaws.com/eos935d_v3.sif)
+- **Apptainer**: [https://models-sif.s3.eu-north-1.amazonaws.com/eos935d_v4.sif](https://models-sif.s3.eu-north-1.amazonaws.com/eos935d_v4.sif)
 
 ### Resource Consumption
 - **Model Size (Mb):** `1294`
