@@ -24,7 +24,7 @@ Last packaged on 2026-11-25.
 ### Output
 - **Output Dimension:** `30`
 - **Output Consistency:** `Fixed`
-- **Interpretation:** Up to thirty human metabolites generated deterministically by beam search from the input compound, ordered by how early the six models propose them (columns metabolite_00 onwards; most inputs give fewer than thirty).
+- **Interpretation:** Up to thirty human metabolites generated deterministically by beam search from the input compound (most inputs give fewer). Six models each propose five candidates; metabolites are ordered by the best rank at which any model proposes them, then by how many models propose them.
 
 Below are the **Output Columns** of the model:
 | Name | Type | Direction | Description |
