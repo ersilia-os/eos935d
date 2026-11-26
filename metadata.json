@@ -37,7 +37,7 @@
     "License": "BSD-3-Clause",
     "Contributor": "carcablop",
     "Incorporation Date": "2022-12-16",
-    "Last Packaging Date": "2026-11-25",
+    "Last Packaging Date": "2026-11-26",
     "Release": "v3.0.1",
     "S3": "https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos935d.zip",
     "DockerHub": "https://hub.docker.com/r/ersiliaos/eos935d",
@@ -45,10 +45,10 @@
     "Apptainer": "https://models-sif.s3.eu-north-1.amazonaws.com/eos935d_v3.sif",
     "Model Size": 1294.0,
     "Environment Size": 2039.0,
-    "Image Size": 1569.25,
-    "Computational Performance 1": 39.15,
-    "Computational Performance 2": 74.73,
-    "Computational Performance 3": 343.61,
+    "Image Size": 1569.26,
+    "Computational Performance 1": 41.15,
+    "Computational Performance 2": 149.5,
+    "Computational Performance 3": 771.14,
     "Computational Performance 4": -1.0,
     "Computational Performance 5": -1.0
 }
